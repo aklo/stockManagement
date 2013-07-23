@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<div class="navbar-fixed-top">&nbsp;</div>
+	</header>
+	<section>
+		<div class='container'>
+			<div class='row'>
+				<div class='span3'>
+					<div class='sidebar affix'>
+						<ul class="nav nav-list">
+							<!--<li class="nav-header">List header</li>-->
+							<li class="nav-header">
+								<h4>lorem ipsum * <br /><small>lorem ipsum dolor sit amet!</small></h4>
+							</li>
+							<li class="active"><a href="#">lorem</a></li>
+							<li><a href="#">ipsum</a></li>
+							<li><a href="#">dolor</a></li>
+							<li><a href="#">sit</a></li>
+							<li class="divider"></li>
+							<li class='dropdown'>
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">amet<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Chat</a></li>
+									<li><a href="#">Investment Calc</a></li>
+									<li><a href="#">Typing Test</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class='span9'>
+					<div class='content'>
+						<div class='app-controls'>
+							<h4>investment calc</h4>
+							<form class="form-horizontal" id='frmCalc'>
+								<div class="row">
+									<div class="span3">
+										<div class='controlGroup'>
+											<label for="inputInitial">Initial Investment</label>
+											<div class="input-prepend input-append">
+												<span class="add-on">$</span>
+												<input class="span2 inputNumber" name="inputInitial" id="inputInitial" type="number" min="1" value="100000" />
+												<span class="add-on">.00</span>
+											</div>
+										</div>
+										<div class='controlGroup'>
+											<label for="inputMonthly">Monthly Investment</label>
+											<div class="input-prepend input-append">
+												<span class="add-on">$</span>
+												<input class="span2 inputNumber" name="inputMonthly" id="inputMonthly" type="number" min="1" value="10000" />
+												<span class="add-on">.00</span>
+											</div>
+										</div>									
+									</div>																		
+									<div class="span3">
+										<div class='controlGroup'>
+											<label for="inputYears">Number of Year to Invest</label>
+											<input class="span2 inputNumber" name="inputYears" type="number" min="1" max="80" value="20" />
+										</div>
+										<div class='controlGroup'>
+											<label for="inputAverageRet">Average Return</label>
+											<div class="input-append">
+												<input class="span1 inputNumber" name="inputAverageRet" id="inputAverageRet" type="number" min="1" max="200" value="15" />
+												<span class="add-on">%</span>
+											</div>
+										</div>									
+									</div>									
+									<div class="span3">
+										<div class='controlGroup'>
+											<label for="inputAge">Age</label>
+											<input class="span2 inputNumber" name='inputAge' id="inputAge" type="number" min="1" max="90" value="23" >
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="span3">
+										<button class="btn" type="button" id='btnCalculate'>Calculate</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<table class='table'>
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th>Age</th>
+									<th>Year</th>
+									<th>Start Principle</th>
+									<th>End Principle</th>
+									<th>Interest</th>
+									<th>End Balance</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="8">
+										<span class='hint'>Press the <em>Calculate</em> button there mate.</span>
+										<img class='preloader' src='img/preloader.gif' />
+									</td>
+								</tr>		
+							</tbody>
+						</table>
+						<div id='canvasContainer'>
+							<h3>Canvas</h3>
+						    <canvas id="cvs" height="300px" width="600px">[No canvas support]</canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer>&nbsp;</footer>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<!--
+	<script src="js/libraries/RGraph.common.core.js" ></script>
+    <script src="js/libraries/RGraph.common.dynamic.js" ></script>
+    <script src="js/libraries/RGraph.common.tooltips.js" ></script>
+    <script src="js/libraries/RGraph.common.effects.js" ></script>
+    <script src="js/libraries/RGraph.line.js" ></script>
+	-->
+    <!--[if lt IE 9]><script src="js/excanvas/excanvas.js"></script><![endif]-->
+	<script>
+	$(document).ready(function(){
+		$('#btnCalculate').click(function(){
+			$('.hint').hide();
+			$('.preloader').addClass('active');
+			var pass = $('#frmCalc').serializeArray();
+			$.post('calculate.php', pass, function(data){
+				if (data) {
+					$('.preloader').hide();
+					$('tbody').html(data);
+					/*
+					var line = new RGraph.Line('cvs', [
+						220000.00,
+						373000.00,
+						548950.00,
+						751292.50,
+						983986.38,
+						1251584.33,			
+						1559321.98,
+						1913220.28,
+						2320203.32,
+						2788233.82,
+						3326468.89,
+						3945439.22
+					], [
+						253000.00,
+						428950.00,
+						631292.50,
+						863986.38,
+						1131584.33,
+						1439321.98,				
+						1793220.28,
+						2200203.32,
+						2668233.82,
+						3206468.89,
+						3825439.22,
+						4537255.11		
+					]);
+					RGraph.Clear(line.canvas);
+					line.Set('chart.curvy', true);
+					line.Set('chart.curvy.tickmarks', true);
+					//line.Set('chart.curvy.tickmarks.fill', null);
+					//line.Set('chart.curvy.tickmarks.stroke', '#aaa');
+					//line.Set('chart.curvy.tickmarks.stroke.linewidth', 2);
+					//line.Set('chart.curvy.tickmarks.size', 3);
+					line.Set('chart.linewidth', 2);
+					line.Set('chart.hmargin', 5);
+					line.Set('chart.labels', ['`13','`14','`15','`16','`17','`18','`19','`20','`21','`22','`23','`24']);
+					//line.Set('chart.tooltips', ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']);
+					line.Set('chart.tickmarks', 'circle');
+					RGraph.Effects.Line.jQuery.Trace(line);
+					*/
+				}
+			});
+		});
+	   $("input[type=number]").keydown(function(event) {
+			// Allow: backspace, delete, tab, escape, and enter
+			if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 || 
+				 // Allow: Ctrl+A
+				(event.keyCode == 65 && event.ctrlKey === true) || 
+				 // Allow: home, end, left, right
+				(event.keyCode >= 35 && event.keyCode <= 39)) {
+					 // let it happen, don't do anything
+					 return;
+			} else {
+				// Ensure that it is a number and stop the keypress
+				if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+					event.preventDefault(); 
+				}   
+			}
+		});
+	});
+
+	</script>
+</body>
+</html>

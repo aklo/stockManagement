@@ -1,0 +1,111 @@
+/*
+0089CC	267499	005985	39ADE6	67BCE6 
+*/
+body {
+
+}
+
+header, footer {
+	background: #67BCE6;
+}
+
+.navbar-fixed-top {
+	background: #67BCE6;
+}
+
+section {
+	padding: 20px 0;
+}
+
+header small {
+	color: #fff;
+}
+
+.content {
+	height: 2000px;
+}
+
+.content .table {
+	margin: 3px 0;
+}
+
+.nav-header {
+	color: inherit;
+}
+
+.navbar .btn-navbar {
+	display: none;
+}
+
+.nav .dropdown-toggle .caret {
+	margin-top: 9px;
+	margin-left: 10px;
+}
+
+.sidebar {
+	width: 220px;
+}
+
+.preloader {
+	display: none;
+}
+
+
+
+.hint, .preloader.active {
+	text-align: center;
+	display: block;
+	margin: 50px auto;
+}
+
+.controlGroup {
+	margin: 0 0 10px;
+}
+
+.ui-datepicker {
+	font-size: 80%;
+}
+.ui-widget-content {
+	border: 1px solid #0088cc;
+}
+.ui-datepicker .ui-datepicker-header {
+	border: 1px solid #0088cc;
+	background: #67BCE6;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	border: 1px solid #0088cc;
+	background: #67BCE6;
+	color: #fff;
+}
+
+.ui-state-default:hover, .ui-widget-content .ui-state-default:hover, .ui-widget-header .ui-state-default:hover {
+	border: 1px solid #fcefa1;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+	border: 1px solid #333;
+	background: #0088cc;
+	color: #fff;
+}
+
+@media (min-width: 1200px) {
+	.sidebar {
+		width: 270px;
+	}
+}
+
+@media (max-width: 979px) and (min-width: 768px) {
+	.sidebar {
+		width: 166px;
+	}
+}
+
+@media (max-width: 767px) {
+	.sidebar.affix {
+	position: static;
+	width: auto;
+	top: 0;
+	}
+}
+
